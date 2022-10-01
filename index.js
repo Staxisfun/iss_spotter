@@ -12,19 +12,19 @@ fetchMyIP((error, returnedIp) => {
     return;
   }
 
-  console.log('It worked! Returned IP:', returnedIp);
+  // console.log('It worked! Returned IP:', returnedIp);
 
   fetchCoordsByIP(returnedIp, (error, returnedCoordinates) => {
-    console.log("returned coordinates: ", returnedCoordinates);
+    // console.log("returned coordinates: ", returnedCoordinates);
 
     if (error) {
       console.log("It didn't work!", error);
       return;
     }
 
-    console.log('It worked! Returned coordinates:', returnedCoordinates);
+    // console.log('It worked! Returned coordinates:', returnedCoordinates);
 
-
+    
 
     
     fetchISSFlyOverTimes(returnedCoordinates.latitude, returnedCoordinates.longitude, (error, passTimes) => {
@@ -34,8 +34,16 @@ fetchMyIP((error, returnedIp) => {
         return;
       }
 
-      console.log('It worked! Returned flyover times:', passTimes);
+      // console.log('It worked! Returned flyover times:', passTimes);
 
+    
+    
+      nextISSTimesForMyLocation(passTimes)
+    
+    
+    
+    
+    
     });
 
 
@@ -48,4 +56,20 @@ fetchMyIP((error, returnedIp) => {
 
 
 
+
+
+const nextISSTimesForMyLocation = function (passTimes) {
+
+for (item of passTimes) {
+
+ passOverDate = new Date(item.risetime * 1000);
+  
+ console.log(`Next pass at ${passOverDate} for ${item.duration} seconds!`)
+
+
+}
+
+
+
+}
 
